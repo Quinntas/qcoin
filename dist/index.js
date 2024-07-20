@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const elliptic_1 = require("elliptic");
+const blockChain_1 = require("./blockChain");
+const transaction_1 = require("./transaction");
+const elliptic = new elliptic_1.ec('secp256k1');
+const privateKey = elliptic.keyFromPrivate('privateKey');
+const publicKey = privateKey.getPublic('hex');
+const qcoin = new blockChain_1.BlockChain(100, 2);
+const tx1 = new transaction_1.Transaction(publicKey, 'publicKey2', 10);
+qcoin.addTransaction(tx1);
+console.log(qcoin.getBalance(publicKey));
+qcoin.mine(publicKey);
+console.log(qcoin.getBalance(publicKey));
